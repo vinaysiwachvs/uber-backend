@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import CommonVariables from './common/common-variables';
+import { connectToDb, disconnectFromDb } from './common/db-connection';
 
 dotenv.config();
 CommonVariables.init();
@@ -14,7 +15,7 @@ export default function createServer(): Express {
 	app.use(cors());
 	app.use(express.json());
 
-	// TODO: Initialize database connection here if needed
+	connectToDb();
 
 	return app;
 }
@@ -22,12 +23,11 @@ export default function createServer(): Express {
 export function destroyApp(event?: string): void {
 	console.log(`⚠️ Destroying the app, event: ${event}`);
 	try {
-		// TODO: Close database connections or other cleanup tasks here
-
-		process.exit(0); // Normal exit
+		disconnectFromDb();
+		process.exit(0);
 	} catch (error) {
 		console.error('❌ Error destroying the app', error);
-		process.exit(1); // Exit with error
+		process.exit(1);
 	}
 }
 

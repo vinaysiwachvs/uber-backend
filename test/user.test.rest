@@ -1,0 +1,35 @@
+@url = http://localhost:8001/api/users
+@id = 6829cf3b0ffe8020e856c089
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI5Y2YzYjBmZmU4MDIwZTg1NmMwODkiLCJpYXQiOjE3NDc1NzA0OTEsImV4cCI6MTc0NzU3MTkzMX0.ubaZi3rRpJEPFLahKqd-jC4e3zfMr9NqjJqaqc6iK50
+
+### GET all users
+GET {{url}}
+Authorization: Bearer {{token}}
+
+### GET user by ID
+GET {{url}}/{{id}}
+Authorization: Bearer {{token}}
+
+### POST create a new user
+POST {{url}}
+Content-Type: application/json
+
+{
+    "first_name": "Vinay",
+    "last_name": "Siwach",
+    "email": "vinay@example.com",
+    "password": "password123"
+}
+
+### Login to get token
+POST {{url}}/login
+Content-Type: application/json
+
+{
+    "email": "vinay@example.com",
+    "password": "password123"
+}
+
+### Logout
+POST {{url}}/logout
+Authorization: Bearer {{token}}

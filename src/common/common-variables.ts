@@ -7,10 +7,6 @@ export default class CommonVariables {
 	static APP_SERVICE_NAME?: string;
 	static ACCESS_TOKEN_SECRET?: string;
 
-	/**
-	 * Retrieves the access token secret.
-	 * Throws an error if the secret is not set.
-	 */
 	static getAccessTokenSecret(): string {
 		const secret = CommonVariables.ACCESS_TOKEN_SECRET;
 		if (!secret) {
@@ -19,10 +15,6 @@ export default class CommonVariables {
 		return secret;
 	}
 
-	/**
-	 * Initialize static variables from environment variables.
-	 * Should be called once at the app startup.
-	 */
 	static init() {
 		console.log('🔧 Initializing common variables...');
 		CommonVariables.PORT = process.env.PORT || '6001';

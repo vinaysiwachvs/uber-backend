@@ -2,6 +2,10 @@ import { Request, response, Response } from 'express';
 import createServer from './app';
 import CommonVariables from './common/common-variables';
 
+//Route imports
+import userRoutes from './route/user.route';
+import { defaultErrorHandler } from './common/middleware/error.middleware';
+
 const app = createServer();
 const { PORT, NODE_ENV, APP_SERVICE_NAME } = CommonVariables;
 
@@ -19,10 +23,10 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // TODO: Add API routes here
-// e.g. app.use('/api/sample', sampleRouter);
+app.use('/api/users', userRoutes);
 
 // TODO: Add error handler middleware here
-// e.g. app.use(defaultErrorHandler);
+app.use(defaultErrorHandler);
 
 app.listen(PORT, () => {
 	console.log(`🚀 Application listening on port: ${PORT} | Environment: ${NODE_ENV} | Service: ${APP_SERVICE_NAME}`);
